@@ -124,10 +124,14 @@ app.use(
 const PORT = process.env.PORT || 6001;
 
 mongoose
-  .connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://rahulps995:FXUzQB45WFNpFOTG@cluster0.axpd3e6.mongodb.net/?retryWrites=true&w=majority",
+    // "process.env.MONGO_URL"
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => {
     app.listen(PORT, () => console.log(`Server Port:${PORT}`));
   })
