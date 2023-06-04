@@ -1,7 +1,8 @@
 import axios from "axios";
 const Axios = axios.create({
-  baseURL: "http://localhost:3001/api",
-  //baseURL: "https://gamersden.tech/api",
+  baseURL: "https://projecthostvercel.vercel.app/api",
 });
 
 export default Axios;
+// baseURL: "http://localhost:3001/api",
+//baseURL: "https://gamersden.tech/api",
