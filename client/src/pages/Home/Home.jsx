@@ -45,7 +45,7 @@ const Home = () => {
   return (
     <div className="h-screen  ">
       {/* <NavBars /> */}
-      {/* <HeaderComponent /> */}
+      <HeaderComponent />
       <BodyComponent />
     </div>
   );
