@@ -5,6 +5,7 @@ import Sidebar from "../../components/Sidebar";
 
 import RightbarHome from "../../components/RightbarHome";
 import SearchFeed from "../../components/SearchFeed";
+import { SideNaveBar } from "../../components/SideNavbar/SideNavebar";
 
 export default function GroupPages() {
   return (
@@ -12,7 +13,7 @@ export default function GroupPages() {
       <HeaderComponent />
 
       <div className="profile">
-        <Sidebar />
+        <SideNaveBar />
         <SearchFeed />
         <RightbarHome />
       </div>

@@ -56,7 +56,7 @@ const Feed = ({ userId, isProfile = false }) => {
   console.log("post length>>>>>>>>>>>>>>>>>>", posts.length);
 
   return (
-    <div className="h-full overflow-y-scroll bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-500 font-mono w rounded-3xl text-center p-6 ">
+    <div className="h-full overflow-y-scroll  bg-gray-200 font-mono w rounded-3xl text-center p-6 ">
       <div style={{ margin: "100px" }}>
         <Share content={content} setContent={setContent} />
 

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "../state";
 import HeaderComponent from "../../components/HeaderComponent";
 import Axios from "../../utils/axios";
+import { SideNaveBar } from "../../components/SideNavbar/SideNavebar";
 function EditProfilepage() {
   const dispatch = useDispatch();
   const [file, setFile] = useState();
@@ -51,6 +52,7 @@ function EditProfilepage() {
   return (
     <>
       <HeaderComponent />
+      <SideNaveBar />
 
       <h1 className="text-3xl font-bold text-center text-gray-800 p-4 bg-emerald-700 font-mono w rounded-3xl">
         Edit Profile

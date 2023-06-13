@@ -19,6 +19,7 @@ import { Link, Navigate } from "react-router-dom";
 import { fetchAllPost } from "../api/postApi/post";
 import { useNavigate } from "react-router-dom";
 import Axios from "../utils/axios";
+import { TypeA } from "./Logout/Logout";
 
 const HeaderComponent = () => {
   const dispatch = useDispatch();
@@ -119,10 +120,11 @@ const HeaderComponent = () => {
                 </span>
               </div>
               <div className="topbarIconItem">
-                <AiOutlineLogout
+                {/* <AiOutlineLogout
                   onClick={() => dispatch(setLogout())}
                   className="text-gray-100"
-                />
+                /> */}
+                <TypeA />
               </div>
             </div>
           </div>

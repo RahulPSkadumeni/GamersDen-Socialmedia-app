@@ -7,13 +7,15 @@ import RightbarGroup from "../../components/RightbarGroup.jsx";
 import Sidebar from "../../components/Sidebar";
 import "./Notifications.css";
 import RightbarHome from "../../components/RightbarHome";
+import { SideNaveBar } from "../../components/SideNavbar/SideNavebar";
 
 export default function Notifications() {
   return (
     <>
       <HeaderComponent />
       <div className="profile  mt-3">
-        <Sidebar />
+        <SideNaveBar />
+        {/* <Sidebar /> */}
         <NotificationFeed />
 
         <RightbarHome />

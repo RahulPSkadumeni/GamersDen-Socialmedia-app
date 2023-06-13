@@ -13,6 +13,7 @@ import { BiEdit } from "react-icons/bi";
 import "./Profilepage.css";
 import { useNavigate } from "react-router-dom";
 import BASE_URL from "../../utils/baseurl";
+import { SideNaveBar } from "../../components/SideNavbar/SideNavebar";
 const Profilepage = () => {
   // const [user, setUser] = useState({});
   const [Profile, setProfile] = useState({});
@@ -54,7 +55,7 @@ const Profilepage = () => {
       <div className="bg-slate-700">
         <HeaderComponent />
         <div className="profile">
-          <Sidebar />
+          <SideNaveBar />
 
           <ProfileComponent />
           <div className="profileRight">

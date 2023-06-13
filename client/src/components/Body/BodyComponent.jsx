@@ -8,6 +8,7 @@ import RightbarHome from "../RightbarHome";
 import Sidebar from "../Sidebar";
 import "./BodyComponent.css";
 import NavigationCard from "../share/NavigationCard/NavigationCard";
+import { SideNaveBar } from "../SideNavbar/SideNavebar";
 
 const BodyComponent = () => {
   const user = useSelector((state) => state.user);
@@ -15,11 +16,12 @@ const BodyComponent = () => {
   let owner = true;
   return (
     <div className="flex flex-col md:flex-row w-full h-screen">
-      <Sidebar className=" md:w-1/3 h-full fixed z-50 top-0 " />
+      <SideNaveBar />
+      {/* <Sidebar className=" md:w-1/3 h-full fixed z-50 top-0 " /> */}
       <div className="flex-grow md:w-3/5 h-full">
         <Feed className="h-full" />
       </div>
-      <RightbarHome className="flex flex-col md:flex-row w-full h-screen" />
+      <RightbarHome />
     </div>
   );
 };

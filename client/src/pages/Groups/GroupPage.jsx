@@ -15,6 +15,7 @@ import { Navigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Axios from "../../utils/axios";
+import { SideNaveBar } from "../../components/SideNavbar/SideNavebar";
 const GroupHome = () => {
   const navigate = useNavigate();
   const { groupId } = useParams();
@@ -58,7 +59,7 @@ const GroupHome = () => {
     <div>
       <HeaderComponent />
       <div className="profile">
-        <Sidebar />
+        <SideNaveBar />
 
         <ProfileComponent />
         <div className="profileRight">

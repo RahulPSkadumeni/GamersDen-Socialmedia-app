@@ -9024,6 +9024,11 @@ react-axios@^2.0.6:
   resolved "https://registry.yarnpkg.com/react-axios/-/react-axios-2.0.6.tgz#a85ac4a92a7eda5ceb9d6102c43db1676b9ed3fe"
   integrity sha512-srQnLZXaW9LDJyC4/qvQ7aPi/rUpsggd3RIM5Q/vFLlQZ4l5bvPtqP/2+UeRXhJH75NfxbcPD3FkjiKONn5V8Q==
 
+react-clickout-handler@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-clickout-handler/-/react-clickout-handler-1.2.1.tgz#f2bc3f5a7b01d50e2875702a026c5c517e54027b"
+  integrity sha512-A7sK2M4LW7S+Bq3wdPZoDfrQK9wARS2/lGH1i7R5e5DP+e84d1LIRPPkVe+AsiiYP6AH8eiaFfczbiiF3wx3MQ==
+
 react-dev-utils@^12.0.1:
   version "12.0.1"
   resolved "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-12.0.1.tgz"

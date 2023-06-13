@@ -1,26 +1,20 @@
-.rigthBarFriend{
-     /* padding-top: 5px; */
-   
+.rigthBarFriend {
+  /* padding-top: 5px; */
 }
 
-.rigthBarFollowing{
-  display:flex;
+.rigthBarFollowing {
+  display: flex;
   justify-content: center;
-  
-
 }
-.rigthBarFollowingImage{
+.rigthBarFollowingImage {
   width: 100px;
   height: 100px;
   border-radius: 5px;
   object-fit: cover;
-  
-  
 }
-.rightbarFriendLists{
-      
- 
+.rightbarFriendLists {
   display: flex;
+
   flex-wrap: wrap;
   justify-content: space-between;
   margin-right: 10px;
@@ -28,26 +22,21 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
-  background-color: #231E39;
+  background-color: #bab9b9;
   border-radius: 5px;
-  box-shadow: 0px 10px 10px -10px rgba(0,0,0,0.75);
+  box-shadow: 0px 10px 10px -10px rgba(36, 36, 36, 0.75);
   padding-bottom: 5px;
-  
-  
-
 }
 
-.rigthBarFollowing{
+.rigthBarFollowing {
   display: flex;
   flex-direction: row;
- 
+
   margin: 5px;
 }
-.friendlistClass{
-  
+.friendlistClass {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-
 }

@@ -34,10 +34,10 @@ p {
 
 .card-container {
   margin-top: 8px;
-  background-color: #2e274c;
+  background-color: #f4f4f4;
   border-radius: 5px;
-  box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
-  color: #b3b8cd;
+  box-shadow: 0px 10px 20px -10px rgba(74, 74, 74, 0.75);
+  color: black;
   padding: 30px;
   /* position: fixed; */
   width: 300px;
@@ -52,7 +52,7 @@ p {
   /* padding-left: 25%; */
 }
 .card-container .pro {
-  color: #231e39;
+  color: #c1c1c3;
   background-color: #febb0b;
   border-radius: 3px;
   font-size: 14px;
