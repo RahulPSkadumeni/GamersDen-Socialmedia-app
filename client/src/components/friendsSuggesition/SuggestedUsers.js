@@ -9,37 +9,41 @@ import axios from "axios";
 import Axios from "../../utils/axios";
 const SuggestedUsers = () => {
   const [suggestedUsers, setSuggestedUsers] = useState([]);
+  console.log(
+    ">>>>>>>>>>>>>suggestedUsers<<<<<<<<<<<<<<<<<<<<<<<",
+    suggestedUsers
+  );
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const userId = user._id;
   const currentUserId = user._id;
-  console.log(">>token>>>>>>>>>", token);
+  // console.log(">>token>>>>>>>>>", token);
   useEffect(() => {
     suggestedUsersSearch();
   }, [user]);
 
   const suggestedUsersSearch = () => {
     fetchSuggestedUser(userId, token).then((result) => {
-      console.log(">>>>>>", result);
+      // console.log(">>>>>>", result);
       setSuggestedUsers(result);
     });
   };
 
   const handleFriendRequest = async (id) => {
-    console.log(id);
-    console.log(currentUserId);
-    console.log("llllllllllllllllllllllllllllllllllllllllllll");
-    console.log("token>>>>>>>>", token, "token");
+    // console.log(id);
+    // console.log(currentUserId);
+    // console.log("llllllllllllllllllllllllllllllllllllllllllll");
+    // console.log("token>>>>>>>>", token, "token");
     friendRequest(id, currentUserId, token);
     //notification
-    console.log("first notification");
+    // console.log("first notification");
     const Notification = await Axios.post(`notification/${id}`, null, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("first");
+    // console.log("first");
     let suggested = suggestedUsers.filter((user) => user._id !== id);
     setSuggestedUsers(suggested);
     // setFilteredUser(data);
@@ -52,11 +56,15 @@ const SuggestedUsers = () => {
           <div className="shadow-lg  mt-4 rounded-2xl w-4/5 bg-white dark:bg-gray-800 p-4">
             <div className="flex-row gap-4 flex justify-center items-center">
               <div className="flex-shrink-0">
-                <Link to={`profile/${userSuggestion._id}`}>
+                <Link to={`/profile/${userSuggestion._id}`}>
                   <a href="#" className="relative block ">
                     <img
                       alt=""
-                      src="https://i.pinimg.com/564x/cf/fc/1d/cffc1d6458cfeae198045145673b351b.jpg"
+                      src={
+                        userSuggestion.picturePath
+                          ? userSuggestion.picturePath
+                          : "https://i.pinimg.com/564x/cf/fc/1d/cffc1d6458cfeae198045145673b351b.jpg"
+                      }
                       className="mx-auto object-cover rounded-full h-16 w-16  mask-"
                     />
                   </a>
@@ -83,7 +91,7 @@ const SuggestedUsers = () => {
               </div>
               <button
                 type="button"
-                onClick={() => handleFriendRequest(userSuggestion._id)}
+                onClick={() => handleFriendRequest(userSuggestion._id, userId)}
                 className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
               >
                 Follow

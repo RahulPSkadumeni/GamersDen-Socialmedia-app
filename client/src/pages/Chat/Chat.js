@@ -13,6 +13,7 @@ import NavIcons from "../../components/NavIcons/NavIcons";
 import ChatBox from "../../components/ChatBox/ChatBox";
 import { io } from "socket.io-client";
 import { useRef } from "react";
+import { SideNaveBar } from "../../components/SideNavbar/SideNavebar";
 
 export default function Chat() {
   const user = useSelector((state) => state.user);
@@ -23,26 +24,32 @@ export default function Chat() {
   const [sendMessage, setSendMessage] = useState(null);
   const [receivedMessage, setReceivedMessage] = useState(null);
   const socket = useRef();
-
+  console.log("sett chattttt", chats);
   useEffect(() => {
     const getChats = async () => {
       try {
         const { data } = await userChats(user._id);
         setChats(data);
-        // console.log(data);
+        console.log("data of chat available user", data);
       } catch (error) {
         console.log(error);
       }
     };
     getChats();
+    console.log("first chats", chats);
   }, [user]);
 
   useEffect(() => {
     socket.current = io("http://localhost:8800");
     socket.current.emit("new-user-add", user._id);
     socket.current.on("get-users", (users) => {
+      console.log(" userrrrrrrrrrrrrrrrrrrrrrr", users);
       setOnlineUsers(users);
-      console.log(onlineUsers);
+      console.log(
+        onlineUsers,
+        "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV",
+        onlineUsers
+      );
     });
   }, [user]);
 
@@ -69,50 +76,53 @@ export default function Chat() {
     return online ? true : false;
   };
   return (
-    <>
-      <HeaderComponent />
-
-      <div className="Chat overflow-y-scroll no-scrollbar x-scroll no-scrollbar bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-500 ... ">
-        <div className="Left-side-chat bg-gradient-to-r from-pink-300 via-purple-300">
-          {/* <LogoSearch /> */}
-          <div className="overflow-hidden p-4 mt-5 ">
-            <h2 className="chats text-white flex flex-col  h-screen p-4 rounded-3xl bg-gradient-to-r from-slate-400 to-blue-400">
-              Chats
-              <div className="mt-3 Chat-list ">
-                {chats.map((chat) => (
-                  <div
-                    onClick={() => {
-                      setCurrentChat(chat);
-                    }}
-                  >
-                    <Conversation
-                      data={chat}
-                      currentUser={user._id}
-                      online={checkOnlineStatus(chat)}
-                    />
-                  </div>
-                ))}
-              </div>
-            </h2>
-          </div>
-        </div>
-
-        {/* Right Side */}
-
-        <div className="Right-side-chat">
-          <div
-            style={{ width: "20rem", display: "flex", alignSelf: "flex-end" }}
-          >
+    <div>
+      <>
+        <HeaderComponent />
+        <div className="flex">
+          <SideNaveBar />
+          <div className="  w-9/12  ">
+            <ChatBox
+              chat={currentChat}
+              currentUser={user._id}
+              setSendMessage={setSendMessage}
+              receivedMessage={receivedMessage}
+            />
+            {/* <div> */}
+            {/* <div
+             style={{ width: "20rem", display: "flex", alignSelf: "flex-end" }}
+            > */}
             {/* <NavIcons /> */}
+            {/* </div> */}
+            {/* </div> */}
           </div>
-          <ChatBox
-            chat={currentChat}
-            currentUser={user._id}
-            setSendMessage={setSendMessage}
-            receivedMessage={receivedMessage}
-          />
+          {/* Right Side */}
+
+          <div className="  w-3/12">
+            {/* <LogoSearch /> */}
+            <div className=" ">
+              <h2 className="chats text-black flex flex-col  h-screen bg-gray-200">
+                Chats
+                <div className="mt-3 Chat-list ">
+                  {chats.map((chat) => (
+                    <div
+                      onClick={() => {
+                        setCurrentChat(chat);
+                      }}
+                    >
+                      <Conversation
+                        data={chat}
+                        currentUser={user._id}
+                        online={checkOnlineStatus(chat)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </h2>
+            </div>
+          </div>
         </div>
-      </div>
-    </>
+      </>
+    </div>
   );
 }

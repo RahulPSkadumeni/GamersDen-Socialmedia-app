@@ -75,14 +75,14 @@ export const allTimeline = async (req, res) => {
           Bucket: bucketName,
           Key: post.image,
         };
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
+        // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
         const command = new GetObjectCommand(getObjectParams);
 
         const url = await getSignedUrl(s3Client, command, { expiresIn: 60 });
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
-        console.log("<<<<<<<<<<<<<<<", url);
+        // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
+        // console.log("<<<<<<<<<<<<<<<", url);
         post.image = url;
-        console.log(">>>>>>>>>>>>>>>", post);
+        // console.log(">>>>>>>>>>>>>>>", post);
       }
     }
 
@@ -129,14 +129,14 @@ export const like = async (req, res) => {
           Bucket: bucketName,
           Key: postData.image,
         };
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
+        // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
         const command = new GetObjectCommand(getObjectParams);
 
         const url = await getSignedUrl(s3Client, command, { expiresIn: 60 });
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
-        console.log("<<<<<<<<<<<<<<<", url);
+        // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
+        // console.log("<<<<<<<<<<<<<<<", url);
         postData.image = url;
-        console.log(">>>>>>>>>>>>>>>", postData);
+        // console.log(">>>>>>>>>>>>>>>", postData);
       }
 
       res.status(200).json(postData);
@@ -151,14 +151,14 @@ export const like = async (req, res) => {
           Bucket: bucketName,
           Key: postData.image,
         };
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
+        // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
         const command = new GetObjectCommand(getObjectParams);
 
         const url = await getSignedUrl(s3Client, command, { expiresIn: 60 });
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
-        console.log("<<<<<<<<<<<<<<<", url);
+        // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
+        // console.log("<<<<<<<<<<<<<<<", url);
         postData.image = url;
-        console.log(">>>>>>>>>>>>>>>", postData);
+        // console.log(">>>>>>>>>>>>>>>", postData);
       }
 
       res.status(200).json(postData);
@@ -169,21 +169,19 @@ export const like = async (req, res) => {
 };
 
 export const allPost = async (req, res) => {
-  console.log(
-    "JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ"
-  );
+  // console.log(
+  //   "JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ"
+  // );
   // try {
   //   const userPosts = await Post.find().sort({
   //     createdAt: -1,
   //   });
-
   //   const friendPosts = await Promise.all(
   //     currentUser.friends.map((friendId) => {
   //       // console.log(friendId);
   //       return Post.find({ userId: friendId }).sort({ createdAt: -1 });
   //     })
   //   );
-
   //   const posts = userPosts.concat(...friendPosts);
   //   for (const post of posts) {
   //     const getObjectParams = {
@@ -192,14 +190,12 @@ export const allPost = async (req, res) => {
   //     };
   //     console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
   //     const command = new GetObjectCommand(getObjectParams);
-
   //     const url = await getSignedUrl(s3Client, command, { expiresIn: 60 });
   //     console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
   //     console.log("<<<<<<<<<<<<<<<", url);
   //     post.image = url;
   //     console.log(">>>>>>>>>>>>>>>", post);
   //   }
-
   //   res.json(posts);
   // } catch (error) {
   //   res.status(500).json(error);

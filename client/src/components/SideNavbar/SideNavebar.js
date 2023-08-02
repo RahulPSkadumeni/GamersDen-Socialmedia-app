@@ -26,46 +26,27 @@ export const SideNaveBar = () => {
 
   const [profile, setProfile] = useState(null);
   const user = useSelector((state) => state.user);
-  console.log("user?????", user);
+  // console.log("user?????", user);
 
   const navigate = useNavigate();
-  // const token = useSelector((state) => state.token);
-
-  // const userId = user._id;
-
-  // const getUser = async () => {
-  //   const response = await fetch(BASE_URL + `/users/${userId}`, {
-  //     method: "GET",
-  //     headers: { Authorization: `Bearer ${token}` },
-  //   });
-  //   const data = await response.json();
-  //   console.log(">>profile>>", data);
-
-  //   setProfile(data);
-  //   console.log(profile);
-  // };
 
   const toggleSidebar = () => {
     setSidebarShow(!sidebarShow);
   };
   useEffect(() => {
     const fetchNotification = async () => {
-      console.log("token", token);
+      // console.log("token", token);
       const data = await axios.post(`/api/notification/unread`, null, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(data.data.length);
+      // console.log(data.data.length);
       setNotificationCount(data.data.length);
     };
     fetchNotification();
   }, []);
 
-  // const [profile, setProfile] = useState(null);
-  // const user = useSelector((state) => state.user);
-
-  // const navigate = useNavigate;
   const token = useSelector((state) => state.token);
 
   const userId = user._id;
@@ -76,16 +57,16 @@ export const SideNaveBar = () => {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
-    console.log(">>profile>>", data);
+    // console.log(">>profile>>", data);
 
     setProfile(data);
-    console.log(profile);
+    // console.log(profile);
   };
 
   useEffect(() => {
     getUser();
   }, []);
-  console.log("????????????????", profile);
+  // console.log("????????????????", profile);
   if (!user) {
     return null;
   }
@@ -114,8 +95,8 @@ export const SideNaveBar = () => {
       <div
         className={
           sidebarShow
-            ? "w-[20rem] h-screen rounded-lg bg-gray-200 dark:bg-[#161819] shadow-xl duration-200"
-            : "w-24 h-screen rounded-lg bg-gray-200 dark:bg-[#161819] shadow-xl duration-200"
+            ? "w-[20rem] h-100vh border border-black  rounded-lg bg-gray-200 dark:bg-[#161819] shadow-xl duration-200"
+            : "w-24 h-100vh sticky rounded-lg bg-gray-200 dark:bg-[#161819] shadow-xl duration-200"
         }
       >
         <div className="flex items-center space-x-2 p-2">
@@ -126,12 +107,12 @@ export const SideNaveBar = () => {
         <div className="space-y-6 p-5">
           <div className="relative flex items-center">
             <div className="flex items-center justify-center rounded-2xl border-2 border-gray-300 dark:border-transparent bg-transparent dark:bg-[#242627] w-fit p-1">
-              <img
+              {/* <img
                 className="rounded-full w-10 h-10 object-contain"
                 // src={Your-Avatar}
-                src={profile?.picturePath}
+                src="https://helostatus.com/wp-content/uploads/2021/08/profile-pictures-for-WhatsApp.jpg"
                 alt="avatar img"
-              />
+              /> */}
             </div>
             <div className={sidebarShow ? "relative ml-4" : "hidden"}>
               <h2 className="text-[#242627] dark:text-white font-semibold text-lg">
@@ -139,6 +120,7 @@ export const SideNaveBar = () => {
               </h2>
               <span className="absolute -top-0.5 -right-2 w-2 h-2 rounded-full bg-[#6fce97]" />
             </div>
+            {/* <h1 onClick={toggleSidebar}></h1> */}
             <div
               onClick={toggleSidebar}
               className={
@@ -217,7 +199,12 @@ export const SideNaveBar = () => {
                   Inbox
                 </h1>
               </div>
-              <div className="flex items-center dark:text-white p-3 rounded-xl cursor-default hover:bg-[#3f8dfd] group">
+              <div
+                onClick={() => {
+                  navigate("/notification");
+                }}
+                className="flex items-center dark:text-white p-3 rounded-xl cursor-default hover:bg-[#3f8dfd] group"
+              >
                 <IoNotificationsSharp className="text-2xl group-hover:text-white text-gray-500" />{" "}
                 {NotificationCount}
                 <span className="topbarIconBadge absolute top-0 right-0 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center"></span>{" "}
@@ -230,23 +217,21 @@ export const SideNaveBar = () => {
                   </p>
                 )}
               </div>
-              <div className="flex items-center dark:text-white p-3 rounded-xl cursor-default hover:bg-[#3f8dfd] group">
+              {/* <div className="flex items-center dark:text-white p-3 rounded-xl cursor-default hover:bg-[#3f8dfd] group">
                 <BsBasket2Fill className="text-2xl group-hover:text-white text-gray-500" />
                 <h1 className={sidebarShow ? listTextDefaultClass : "hidden"}>
                   Sales
                 </h1>
-              </div>
+              </div> */}
             </div>
           </div>
-          <div className="px-1">
-            <small className="text-xs font-medium text-[#161925] dark:text-gray-500 uppercase py-2 truncate">
-              Add new
-            </small>
-          </div>
-          <ul className="p-4 ml-4 text-black-200 ">
-            Suggested Users
-            <SuggestedUsers />
-          </ul>
+          <div className="px-1"></div>
+          {sidebarShow && (
+            <ul className="p-4 ml-4 text-black-200 ">
+              Suggested Users
+              <SuggestedUsers />
+            </ul>
+          )}
           <div></div>
           {/* <div className="flex flex-col items-center justify-center cursor-pointer border hover:border-gray-500 hover:dark:border-white py-4 rounded-lg bg-[#f2f3f7] dark:bg-[#323435]">
             <BsPlusCircleFill className="text-[#3f8dfd] text-3xl bg-white rounded-full shadow-xl" />

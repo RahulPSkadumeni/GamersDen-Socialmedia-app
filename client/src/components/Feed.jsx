@@ -60,7 +60,8 @@ const Feed = ({ userId, isProfile = false }) => {
       <div style={{ margin: "100px" }}>
         <Share content={content} setContent={setContent} />
 
-        {posts && posts?.map((p) => <Post key={p._id} post={p} />)}
+        {posts &&
+          posts?.map((p) => <Post className="Share" key={p._id} post={p} />)}
       </div>
     </div>
   );

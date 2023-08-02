@@ -14,6 +14,7 @@ import "./Profilepage.css";
 import { useNavigate } from "react-router-dom";
 import BASE_URL from "../../utils/baseurl";
 import { SideNaveBar } from "../../components/SideNavbar/SideNavebar";
+import Head from "../../components/Head";
 const Profilepage = () => {
   // const [user, setUser] = useState({});
   const [Profile, setProfile] = useState({});
@@ -29,16 +30,16 @@ const Profilepage = () => {
   }, []);
 
   const getUser = async () => {
-    const response = await fetch(BASE_URL + `users/${userId}`, {
+    const response = await fetch(BASE_URL + `/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
     console.log("response>>>>>>>>>", response);
     const data = await response.json();
-    console.log(
-      ">>>>>>>>>>>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS>>>>>>>>",
-      data
-    );
+    // console.log(
+    //   ">>>>>>>>>>>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS>>>>>>>>",
+    //   data
+    // );
 
     setProfile(data);
   };
@@ -52,8 +53,8 @@ const Profilepage = () => {
 
   return (
     <>
-      <div className="bg-slate-700">
-        <HeaderComponent />
+      <div className="bg-white">
+        <Head />
         <div className="profile">
           <SideNaveBar />
 
@@ -89,12 +90,12 @@ const Profilepage = () => {
             </div>
 
             {
-              <div
-                className="status  text-4xl  text-white translate-x-1/2 mr-7 hover:text-red-700  cursor-pointer text-center"
-                onClick={() => navigate(`/editProfile/${Profile._id}`)}
-              >
-                <BiEdit />
-              </div>
+              // <div
+              //   className="status  text-4xl  text-white translate-x-1/2 mr-7 hover:text-red-700  cursor-pointer text-center"
+              //   onClick={() => navigate(`/editProfile/${Profile._id}`)}
+              // >
+              //   <BiEdit />
+              // </div>
             }
             <div className="profileRightBottom">
               <div className="bg-slate-600 w-3/4 h-v100%">

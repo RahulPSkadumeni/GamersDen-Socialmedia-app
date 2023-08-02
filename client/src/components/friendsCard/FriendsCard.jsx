@@ -23,7 +23,7 @@ const FriendsCard = () => {
 
   return (
     <div>
-      <ul className="rightbarFriendList">
+      <ul className="flex flex-col">
         {friends.map((friend) => (
           <li key={friend._id} className="rigthBarFriend">
             <div className="rightBarProfileImageContainer">

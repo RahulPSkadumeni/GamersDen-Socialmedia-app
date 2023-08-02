@@ -8,6 +8,7 @@ import state from "../state";
 import "./Home.css";
 import { NavBars } from "../../components/NavBar_New/Nav";
 import BASE_URL from "../../utils/baseurl";
+import Head from "../../components/Head";
 
 const Home = () => {
   const isAuth = Boolean(useSelector((state) => state.token));
@@ -43,9 +44,10 @@ const Home = () => {
   } = user;
 
   return (
-    <div className="h-screen  ">
+    <div className="h-screen   ">
       {/* <NavBars /> */}
-      <HeaderComponent />
+      <Head />
+      {/* <HeaderComponent /> */}
       <BodyComponent />
     </div>
   );

@@ -149,7 +149,7 @@ export default function Otp_login() {
   };
 
   return (
-    <section className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 ... flex items-center justify-center h-screen">
+    <section className=" bg-gray-500/50  flex items-center justify-center h-screen">
       <div>
         <Toaster toastOptions={{ duration: 4000 }} />
         <div id="recaptcha-container"></div>

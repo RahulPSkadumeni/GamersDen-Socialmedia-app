@@ -6,6 +6,7 @@ import { setPosts } from "../state";
 import HeaderComponent from "../../components/HeaderComponent";
 import Axios from "../../utils/axios";
 import { SideNaveBar } from "../../components/SideNavbar/SideNavebar";
+import RightbarHome from "../../components/RightbarHome";
 function EditProfilepage() {
   const dispatch = useDispatch();
   const [file, setFile] = useState();
@@ -50,174 +51,178 @@ function EditProfilepage() {
   };
 
   return (
-    <>
+    <div>
       <HeaderComponent />
-      <SideNaveBar />
 
-      <h1 className="text-3xl font-bold text-center text-gray-800 p-4 bg-emerald-700 font-mono w rounded-3xl">
-        Edit Profile
-      </h1>
-      <form
-        onSubmit={handleSubmit((e) => {
-          handlePost(e);
-        })}
-        className="grid grid-cols-2 w-1/2 gap-4 p-8 bg-gradient-to-br from-yellow-200 to-orange-200 font-mono w rounded-3xl text-center p-6 mt-5 rounded-lg shadow-lg bg-opacity-60 backdrop-filter backdrop-blur-md"
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        <label
-          htmlFor="someID"
-          className="bg-gray-800 text-xl bg-opacity-80 text-white rounded-md p-2"
-        >
-          first name
-        </label>
-        <input
-          className="firstName   border border-gray-300 bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent "
-          placeholder={user.firstName}
-          {...register("firstName", { required: true })}
-          aria-invalid={errors.firstName ? "true" : "false"}
-        />
-        {errors.firstName && <p role="alert">First name is required</p>}
+      <div className="flex ">
+        <SideNaveBar />
+        <div className="w-1/2">
+          <h1 className="text-3xl font-bold underline text-center text-gray-800 p-4font-mono w rounded-3xl">
+            Edit Profile
+          </h1>
+          <div>
+            <div className=""></div>
+            <form
+              onSubmit={handleSubmit((e) => {
+                handlePost(e);
+              })}
+              className=" grid grid-cols-2 w-1/2 mx-60 justify-end"
+            >
+              <label
+                htmlFor="someID"
+                className="bg-gray-800 text-xl bg-opacity-50 text-white rounded-md p-2 m-2"
+              >
+                first name
+              </label>
+              <input
+                className="firstName   border border-gray-300 m-2 bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent "
+                placeholder={user.firstName}
+                {...register("firstName", { required: true })}
+                aria-invalid={errors.firstName ? "true" : "false"}
+              />
+              {errors.firstName && <p role="alert">First name is required</p>}
 
-        <label
-          htmlFor="someID"
-          className="bg-gray-800 text-xl bg-opacity-50 text-white rounded-md p-2"
-        >
-          last name
-        </label>
-        <input
-          className=" lastName   border border-gray-300 bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          ref={user.lastName}
-          {...register("lastName", { required: true })}
-          aria-invalid={errors.lastName ? "true" : "false"}
-        />
-        {errors.lastName && <p role="alert">last name is required</p>}
+              <label
+                htmlFor="someID"
+                className="bg-gray-800 m-2 text-xl bg-opacity-50 text-white rounded-md p-2"
+              >
+                last name
+              </label>
+              <input
+                className=" lastName  m-2  border border-gray-300 bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                ref={user.lastName}
+                {...register("lastName", { required: true })}
+                aria-invalid={errors.lastName ? "true" : "false"}
+              />
+              {errors.lastName && <p role="alert">last name is required</p>}
 
-        <label
-          htmlFor="someID"
-          className="bg-gray-800 text-xl bg-opacity-50 text-white rounded-md p-2"
-        >
-          user name
-        </label>
-        <input
-          className="userName   border border-gray-300 bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder={user.userName}
-          {...register("userName", { required: true })}
-          aria-invalid={errors.userName ? "true" : "false"}
-        />
-        {errors.userName && <p role="alert">user name is required</p>}
-        <label
-          htmlFor="someID"
-          className="bg-gray-800 text-xl bg-opacity-50 text-white rounded-md p-2"
-        >
-          email:{" "}
-        </label>
-        <input
-          className="email   border border-gray-300 bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder={user.email}
-          {...register("email", { required: true })}
-          aria-invalid={errors.email ? "true" : "false"}
-        />
-        {errors.email && <p role="alert">{errors.email?.message}</p>}
-        <label
-          htmlFor="someID"
-          className="bg-gray-800 text-xl bg-opacity-50 text-white rounded-md p-2"
-        >
-          phone number:
-        </label>
-        <input
-          placeholder={user.phoneNumber}
-          className="phoneNumber  border border-gray-300 bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          ref={user.phoneNumber}
-          {...register("phoneNumber", { required: true })}
-          aria-invalid={errors.phoneNumber ? "true" : "false"}
-        />
-        {errors.phoneNumber && (
-          <p role="alert">{errors.phoneNumber?.message}</p>
-        )}
-        <label
-          htmlFor="someID"
-          className="bg-gray-800 text-xl bg-opacity-50 text-white rounded-md p-2"
-        >
-          status
-        </label>
-        <input
-          placeholder={user.desc}
-          className="desc  border border-gray-300 bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          {...register("desc", { required: true })}
-          aria-invalid={errors.desc ? "true" : "false"}
-        />
-        {errors.desc && <p role="alert">{errors.desc?.message}</p>}
-        <label
-          htmlFor="someID"
-          className="bg-gray-800 text-xl bg-opacity-50 text-white rounded-md p-2"
-        >
-          city:
-        </label>
-        <input
-          placeholder={user.city}
-          className="city  border border-gray-300 bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          {...register("city", { required: true })}
-          aria-invalid={errors.city ? "true" : "false"}
-        />
-        {errors.city && <p role="alert">{errors.city?.message}</p>}
-        <label
-          htmlFor="someID"
-          className="bg-gray-800 text-xl bg-opacity-50 text-white rounded-md p-2"
-        >
-          From:
-        </label>
-        <input
-          placeholder={user.from}
-          className="from border border-gray-300 bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          {...register("from", { required: true })}
-          aria-invalid={errors.from ? "true" : "false"}
-        />
-        {errors.from && <p role="alert">{errors.city?.from}</p>}
-        <label
-          htmlFor="someID"
-          className="bg-gray-800 text-xl bg-opacity-50 text-white rounded-md p-2"
-        >
-          Occupation
-        </label>
-        <input
-          placeholder={user.occupation}
-          className="occupation border border-gray-300 bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          {...register("occupation", { required: true })}
-          aria-invalid={errors.occupation ? "true" : "false"}
-        />
-        {errors.occupation && <p role="alert">{errors.occupation?.message}</p>}
-        <label
-          htmlFor="someID"
-          className="bg-gray-800 text-xl bg-opacity-50 text-white rounded-md p-2"
-        >
-          Profile Pic
-        </label>
-        <input
-          className="picturePath border border-gray-300 bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          onChange={(e) => setFile(e.target.files[0])}
-          type="file"
-          accept="image/*"
-          placeholder="add Image"
-          {...register("picturePath", { required: true })}
-          aria-invalid={errors.picturePath ? "true" : "false"}
-        ></input>
-        {errors.picturePath && (
-          <p role="alert">{errors.picturePath?.message}</p>
-        )}
-        <div>
-          <div className="w-1/2"></div>
-          <input
-            className=" align-middle bg-emerald-600 py-2 px-4 rounded-md shadow-md backdrop-filter backdrop-blur-lg backdrop-saturate-150 hover:shadow-xl hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 transition-all duration-200"
-            type="submit"
-          ></input>
+              <label
+                htmlFor="someID"
+                className="bg-gray-800  m-2 text-xl bg-opacity-50 text-white rounded-md p-2"
+              >
+                user name
+              </label>
+              <input
+                className="userName m-2  border border-gray-300 bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder={user.userName}
+                {...register("userName", { required: true })}
+                aria-invalid={errors.userName ? "true" : "false"}
+              />
+              {errors.userName && <p role="alert">user name is required</p>}
+              <label
+                htmlFor="someID"
+                className="bg-gray-800 m-2 text-xl bg-opacity-50 text-white rounded-md p-2"
+              >
+                email:
+              </label>
+              <input
+                className="email   border m-2 border-gray-300 bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder={user.email}
+                {...register("email", { required: true })}
+                aria-invalid={errors.email ? "true" : "false"}
+              />
+              {errors.email && <p role="alert">{errors.email?.message}</p>}
+              <label
+                htmlFor="someID"
+                className="bg-gray-800 m-2 text-xl bg-opacity-50 text-white rounded-md p-2"
+              >
+                phone number:
+              </label>
+              <input
+                placeholder={user.phoneNumber}
+                className="phoneNumber m-2  border border-gray-300 bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                ref={user.phoneNumber}
+                {...register("phoneNumber", { required: true })}
+                aria-invalid={errors.phoneNumber ? "true" : "false"}
+              />
+              {errors.phoneNumber && (
+                <p role="alert">{errors.phoneNumber?.message}</p>
+              )}
+              <label
+                htmlFor="someID"
+                className="bg-gray-800 m-2 text-xl bg-opacity-50 text-white rounded-md p-2"
+              >
+                status
+              </label>
+              <input
+                placeholder={user.desc}
+                className="desc  border m-2 border-gray-300 bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                {...register("desc", { required: true })}
+                aria-invalid={errors.desc ? "true" : "false"}
+              />
+              {errors.desc && <p role="alert">{errors.desc?.message}</p>}
+              <label
+                htmlFor="someID"
+                className="bg-gray-800 m-2 text-xl bg-opacity-50 text-white rounded-md p-2"
+              >
+                city:
+              </label>
+              <input
+                placeholder={user.city}
+                className="city  border border-gray-300 m-2 bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                {...register("city", { required: true })}
+                aria-invalid={errors.city ? "true" : "false"}
+              />
+              {errors.city && <p role="alert">{errors.city?.message}</p>}
+              <label
+                htmlFor="someID"
+                className="bg-gray-800 text-xl bg-opacity-50 m-2 text-white rounded-md p-2"
+              >
+                From:
+              </label>
+              <input
+                placeholder={user.from}
+                className="from border border-gray-300 bg-gray-50  m-2 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                {...register("from", { required: true })}
+                aria-invalid={errors.from ? "true" : "false"}
+              />
+              {errors.from && <p role="alert">{errors.city?.from}</p>}
+              <label
+                htmlFor="someID"
+                className="bg-gray-800 text-xl bg-opacity-50 m-2  text-white rounded-md p-2"
+              >
+                Occupation
+              </label>
+              <input
+                placeholder={user.occupation}
+                className="occupation border border-gray-300 m-2 bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                {...register("occupation", { required: true })}
+                aria-invalid={errors.occupation ? "true" : "false"}
+              />
+              {errors.occupation && (
+                <p role="alert">{errors.occupation?.message}</p>
+              )}
+              <label
+                htmlFor="someID"
+                className="bg-gray-800 text-xl bg-opacity-50 m-2 text-white rounded-md p-2"
+              >
+                Profile Pic
+              </label>
+              <input
+                className="picturePath border border-gray-300 m-2  bg-gray-50 py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                onChange={(e) => setFile(e.target.files[0])}
+                type="file"
+                accept="image/*"
+                placeholder="add Image"
+                {...register("picturePath", { required: true })}
+                aria-invalid={errors.picturePath ? "true" : "false"}
+              ></input>
+              {errors.picturePath && (
+                <p role="alert">{errors.picturePath?.message}</p>
+              )}
+              <div>
+                <div className="w-1/2"></div>
+                <input
+                  className=" align-middle bg-emerald-600 py-2 px-4  m-2 rounded-md shadow-md backdrop-filter backdrop-blur-lg backdrop-saturate-150 hover:shadow-xl hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 transition-all duration-200"
+                  type="submit"
+                ></input>
+              </div>
+            </form>
+          </div>
         </div>
-      </form>
-    </>
+        <RightbarHome className="justify-end" />
+      </div>
+    </div>
   );
 }
 

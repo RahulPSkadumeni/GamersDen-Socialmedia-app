@@ -36,9 +36,11 @@ function Comment({ postId, comment, setAllComments, userId }) {
     console.log("updatedComments", updatedComments.data);
     setAllComments(updatedComments.data);
   };
-  const postReplay = async () => {
-    const response = await Axios.post(
-      "comment/create-replay",
+  const postReplay = async (e) => {
+    e.preventDefault();
+    console.log(replay);
+    const response = await axios.post(
+      "api/comment/create-replay",
       {
         CommentText: replay,
         // user: user._id,
@@ -54,6 +56,7 @@ function Comment({ postId, comment, setAllComments, userId }) {
     let updatedComments = await Axios.get(`comment/post/${postId}`);
     console.log("updatedComments", updatedComments.data);
     setAllComments(updatedComments.data);
+    setReplay("");
   };
 
   return (
@@ -185,9 +188,12 @@ function Comment({ postId, comment, setAllComments, userId }) {
             <input
               value={replay}
               onChange={(e) => setReplay(e.target.value)}
-              className="block w-full p-3 px-4 overflow-hidden h-12 rounded-full"
+              className="block w-full p-3 px-4 overflow-hidden h-12 rounded-full "
               placeholder="Leave a replay"
-            />
+            />{" "}
+            <button className="bg-blue-400 rounded-xl m-2 p-2" type="submit">
+              Replay
+            </button>
           </form>
         </div>
 

@@ -43,24 +43,24 @@ const upload = multer({ storage: storage });
 // create post
 router.post("/createpost", upload.single("postImg"), async (req, res) => {
   console.log("first????????????????");
-  console.log(req.body);
-  console.log(req.file);
+  // console.log(req.body);
+  // console.log(req.file);
 
-  const newPost = new Post(req.body);
-  try {
-    const savePost = await newPost.save();
-    console.log(savePost);
-    res.status(200).json(savePost + " new post created");
-  } catch (error) {
-    res.status(500).json(error);
-  }
+  // const newPost = new Post(req.body);
+  // try {
+  //   const savePost = await newPost.save();
+  //   console.log(savePost);
+  //   res.status(200).json(savePost + " new post created");
+  // } catch (error) {
+  //   res.status(500).json(error);
+  // }
 });
 
 router.post("/createpostImg", upload.single("image"), async (req, res) => {
   console.log("first>>>>>>>>????????????????");
   let newPost;
   if (req.file) {
-    console.log("here file");
+    // console.log("here file");
     const file = req.file;
     const des = req.body.des;
     const buffer = await sharp(req.file.buffer)
@@ -92,7 +92,7 @@ router.post("/createpostImg", upload.single("image"), async (req, res) => {
       groupId: req.body?.groupId,
     });
   } else {
-    console.log("here");
+    // console.log("here");
     newPost = new Post({
       des: req.body.des,
 
@@ -100,10 +100,10 @@ router.post("/createpostImg", upload.single("image"), async (req, res) => {
       groupId: req.body?.groupId,
     });
   }
-  console.log(newPost);
+  // console.log(newPost);
   try {
     const savePost = await newPost.save();
-    console.log(savePost);
+    console.log(savePost, ">>>>>>>>>>>>>>>>>>>>>>");
     res.status(200).json(savePost + " new post created");
   } catch (error) {
     res.status(500).json(error);
@@ -238,14 +238,14 @@ router.get("/profile/:id", async (req, res) => {
           Bucket: bucketName,
           Key: post.image || post.picturePath,
         };
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
+        // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
         const command = new GetObjectCommand(getObjectParams);
 
         const url = await getSignedUrl(s3Client, command, { expiresIn: 60 });
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
-        console.log("<<<<<<<<<<<<<<<", url);
+        // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
+        // console.log("<<<<<<<<<<<<<<<", url);
         post.picturePath = url;
-        console.log(">>>>>>>>>>>>>>>", post);
+        // console.log(">>>>>>>>>>>>>>>", post);
       }
     }
 

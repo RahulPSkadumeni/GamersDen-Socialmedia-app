@@ -14,6 +14,11 @@ const NotificationFeed = () => {
   const token = useSelector((state) => state.token);
   const [Notifications, setNotifications] = useState(null);
   const user = useSelector((state) => state.user);
+  useEffect(() => {
+    setTimeout(() => {
+      markAllNotificationsAsRead();
+    }, 4000);
+  });
   const markAllNotificationsAsRead = async () => {
     try {
       const response = await Axios.post(
@@ -49,14 +54,14 @@ const NotificationFeed = () => {
 
   console.log();
   return (
-    <div className="feed bg-gradient-to-br from-purple-500 via-pink-500 to-indigo-500 font-mono w rounded-3xl text-center p-6 ">
+    <div className="vh-100 w-2/3   w  overflow-y-scroll scroll-smooth  bg-gray-200 ">
       <div className="feedWrapper">
-        <button
+        {/* <button
           className="bg-sky-600 m-4 p-4 right-0 rounded-full "
           onClick={markAllNotificationsAsRead}
         >
           Mark all as read
-        </button>
+        </button> */}
 
         <SingleNotification Notifications={Notifications} />
       </div>

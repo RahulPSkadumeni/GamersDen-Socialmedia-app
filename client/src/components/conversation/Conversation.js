@@ -4,7 +4,7 @@ import { getUser } from "../../api/usersApi/user";
 
 function Conversation({ data, currentUser, online }) {
   const [userData, setUserData] = useState(null);
-
+  console.log(">>>>>userData", userData);
   useEffect(() => {
     // console.log(data);
     const userId = data.members.find((id) => id !== currentUser);
@@ -23,32 +23,35 @@ function Conversation({ data, currentUser, online }) {
 
   return (
     <>
-      <div className="follower conversation">
-        <div>
-          {online && <div className="online-dot"></div>}
-          <img
-            src="https://i.pinimg.com/564x/cf/fc/1d/cffc1d6458cfeae198045145673b351b.jpg"
-            // {
-            //   userData?.profilePicture
-            //     ? process.env.REACT_APP_PUBLIC_FOLDER + userData.profilePicture
-            //     : process.env.REACT_APP_PUBLIC_FOLDER + "defaultProfile.png"
-            // }
-            alt="Profile"
-            className="followerImage"
-            style={{ width: "50px", height: "50px" }}
-          />
-          <div className="name" style={{ fontSize: "0.8rem" }}>
+      <div className="bg-white rounded-3xl flex ">
+        <div className="flex flex-col ">
+          {online && <div className="online-dot ">.</div>}
+
+          <div className="text-black  text-2xl p-3">
+            <img
+              src={
+                userData?.picturePath
+                  ? userData.picturePath
+                  : "https://i.pinimg.com/564x/cf/fc/1d/cffc1d6458cfeae198045145673b351b.jpg"
+              }
+              alt=""
+              className="followerImage"
+              style={{ width: "50px", height: "50px" }}
+            />
             <span>
               {userData?.firstName} {userData?.lastName}
             </span>
-            <span style={{ color: online ? "#51e200" : "#808080" }}>
+            <span
+              className="p-4 text-end"
+              style={{ color: online ? "#51e200" : "#808080" }}
+            >
               {/* {online ? "Online" : "Offline"}. */}
-              {!online ? "Offline" : ""}
+              {!online ? "Offline" : "online"}
             </span>
           </div>
         </div>
       </div>
-      <hr style={{ width: "85%", border: "0.1px solid #ececec" }} />
+      <hr style={{ width: "85%", border: "0.1px solid ##808080" }} />
     </>
   );
 }

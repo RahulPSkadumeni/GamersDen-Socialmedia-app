@@ -59,9 +59,9 @@ const SearchFeed = () => {
   console.log(">>>>", UsersGroups);
 
   return (
-    <div className="Gfeed bg-slate-600">
+    <div className="Gfeed ">
       <div className="feedWrapper">
-        <CreateGroupForm />
+        {/* <CreateGroupForm /> */}
 
         <div className="FeaturedCommunity pl-5 pt-5 ">
           <h3> Featured Community</h3> <div></div>

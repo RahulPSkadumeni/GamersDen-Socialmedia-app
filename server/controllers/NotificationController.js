@@ -53,7 +53,7 @@ export const follow = async (req, res) => {
     const followingUser = await User.findById(userId);
     console.log("follow", followingUser);
     const notification = new Notification({
-      user: req.userId,
+      user: req.body.userId,
       user2: req.params.id,
 
       message: `${followingUser.userName} started following you `,

@@ -23,17 +23,29 @@ const GroupFeed = () => {
     }
   }, []);
 
-  const fetchPosts = async () => {
-    let res = await axios.get(`/group/${groupId}/posts`);
-    console.log("res is", res);
-    setGroupPost(res.data);
-    console.log("groupPost", groupPost);
-  };
+  // const fetchPosts = async () => {
+  //   let res = await axios.get(`/group/${groupId}/posts`);
+  //   console.log("res is", res);
+  //   setGroupPost(res.data);
+  //   console.log("groupPost", groupPost);
+  // };
 
+  const fetchPosts = () => {
+    axios
+      .get(`/api/group/${groupId}/posts`)
+      .then((res) => {
+        console.log("res is", res);
+        setGroupPost(res.data);
+        console.log("groupPost", groupPost);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="feed">
       <div className="feedWrapper">
-        {/* <Banner /> */}
+        <Banner />
         <Share groupId={groupId} />
         {groupPost.map((p) => (
           <Post key={p.id} post={p} />

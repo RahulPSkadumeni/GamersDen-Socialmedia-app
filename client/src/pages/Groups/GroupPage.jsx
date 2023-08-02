@@ -16,15 +16,17 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Axios from "../../utils/axios";
 import { SideNaveBar } from "../../components/SideNavbar/SideNavebar";
+import RightbarHome from "../../components/RightbarHome";
 const GroupHome = () => {
   const navigate = useNavigate();
   const { groupId } = useParams();
   const [group, setGroup] = useState(null);
   const [groupPost, setGroupPost] = useState([]);
-  console.log("????????????", groupId);
+  console.log("????????????", group);
   const user = useSelector((state) => state.user);
   useEffect(() => {
     try {
+      console.log(">>>>>>>>>>>>>>>>>>>>LLLLLLLLLLLLLLLLLLLL");
       fetchGroup();
     } catch (error) {
       console.log(error);
@@ -32,11 +34,11 @@ const GroupHome = () => {
   }, []);
 
   const fetchGroup = async () => {
-    console.log(groupId);
+    // console.log(groupId);
     let res = await Axios.get(`/group/groupDetails/${groupId}/`);
-    console.log("group is", res.data.groupName);
+    console.log("group is>>>>>>>>>>>>>>>>>>>>>>>>>>>", res.data.groupName);
     setGroup(res.data);
-    console.log("group", group);
+    // console.log("group", group);
   };
 
   const leaveGroup = async (event) => {
@@ -62,40 +64,44 @@ const GroupHome = () => {
         <SideNaveBar />
 
         <ProfileComponent />
-        <div className="profileRight">
-          <div className="profileRightTop">
-            <div className="profileCover">
-              <img
-                className="profileCoverImage"
-                src="https://www.fbcoverlover.com/covers/mortal-kombat-2-Facebook-Cover.jpg?i"
-                alt="coverImg"
-              />
 
-              <img
-                className="profileUserImage"
-                src="https://i.pinimg.com/564x/0f/e6/11/0fe611de8b4a8747c317715e4e77ec0d.jpg"
-                alt="profileAvatar"
-              />
-            </div>
-            <div className="profileInfo">
-              <h>{group?.groupName}</h>
-              <h4>
+        <div>
+          <div className="profileRight">
+            {/* <div className="profileRightTop">
+              <div className="profileCover">
                 <button
-                  className="bg-red-900 rounded-full p-3 text-white absolute top-0 right-0 m-3"
+                  className="bg-red-900 rounded-full p-3 mt-20 text-white absolute top-0 right-0 m-3"
                   onClick={leaveGroup}
                 >
                   Leave
                 </button>
-              </h4>
-              <div className="status">
-                <p>{group?.description}</p>
+                <img
+                  className="profileCoverImage"
+                  src="https://www.fbcoverlover.com/covers/mortal-kombat-2-Facebook-Cover.jpg?i"
+                  alt="coverImg"
+                />
+
+                <img
+                  className="profileUserImage"
+                  src={group?.avatar}
+                  alt="profileAvatar"
+                />
               </div>
+              <div className="profileInfo">
+                <h4></h4>
+                <div className="status"></div>
+                <h className="text-black mt-5 font-bold pt-10">
+                  {group?.groupName}
+                </h>
+                <p className="text-black mt-5">{group?.description}</p>
+              </div>
+            </div> */}
+            <div className="profileRightBottom">
+              <GroupFeed />
             </div>
           </div>
-          <div className="profileRightBottom">
-            <GroupFeed />
-          </div>
         </div>
+        <RightbarHome />
       </div>
     </div>
   );

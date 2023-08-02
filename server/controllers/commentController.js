@@ -48,7 +48,9 @@ export const GetAComment = async (req, res) => {
 // create
 
 export const CreateComment = async (req, res) => {
-  console.log("first stage");
+  console.log(
+    "first stage >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+  );
   console.log(req.body);
   try {
     // const createdComment=new Comments(req.body)

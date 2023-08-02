@@ -22,10 +22,10 @@ const FriendsList = () => {
   }, []);
 
   return (
-    <>
+    <div>
       {friends?.length > 0
         ? friends.map((friendList) => (
-            <div>
+            <div key={friendList._id} className="flex flex-row">
               <ul className="friendlistClass">
                 <li className="rightbarFriendLists  hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
                   <div className="rigthBarFollowing">
@@ -43,7 +43,7 @@ const FriendsList = () => {
             </div>
           ))
         : null}
-    </>
+    </div>
   );
 };
 

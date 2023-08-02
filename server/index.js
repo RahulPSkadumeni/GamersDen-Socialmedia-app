@@ -36,22 +36,20 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-// app.use(
-//   cors(
-//     {
-//     // origin: ["http://localhost:3000"],
-//     origin: [
-//       "https://main.dyzo0pe2jo0xu.amplifyapp.com/login/api/",
-//       "https://main--mellifluous-liger-d3ba7b.netlify.app/api/",
-//       "https://mellifluous-liger-d3ba7b.netlify.app/api",
-//       "http://localhost:3000/api/",
-//     ],
-//     method: ["GET", "POST", "PATCH", "PUT"],
-//     credentials: true,
-//   }
-//   )
-// );
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    // origin: [
+    //   // "https://main.dyzo0pe2jo0xu.amplifyapp.com/login/api/",
+    //   // "https://main--mellifluous-liger-d3ba7b.netlify.app/api/",
+    //   // "https://mellifluous-liger-d3ba7b.netlify.app/api",
+    //   "http://localhost:3000/api/",
+    // ],
+    method: ["GET", "POST", "PATCH", "PUT"],
+    credentials: true,
+  })
+);
+//app.use(cors());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 /* Storage * git gub rep of multer*/
@@ -79,7 +77,7 @@ app.post("createPosts", (req, res) => {
 });
 /*_____________Route______________middleware__________ controller(_actual logic)_____*/
 app.post(
-  "/register",
+  "/api/register",
   register
 ); /* should be in route file but we ned upload variable so */
 

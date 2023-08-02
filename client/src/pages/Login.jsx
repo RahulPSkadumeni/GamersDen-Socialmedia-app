@@ -83,9 +83,19 @@ function Login() {
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 flex flex-col sm:flex-row items-center justify-center">
+      <div className="login min-h-screen  flex flex-col sm:flex-row items-center justify-center">
         <div className="hidden sm:block sm:w-1/2 lg:w-1/2 xl:w-2/4 p-3 m-5 bg-gray-500/50 rounded-3xl rounded-bl-none flex items-center justify-center">
-          <h3 className=" text-5xl font-bold  text-white">Gamers-DEN</h3>
+          <div>
+            <h3 className=" text-5xl font-bold  text-white">Gamers-DEN</h3>
+            {/* <img
+              className="h-96"
+              src={process.env.PUBLIC_URL + "/assets/"}
+              alt="loginimage"
+            /> */}
+            {/* <a href="https://lovepik.com/images/png-web.html">
+              Web Png vectors by Lovepik.com
+            </a> */}
+          </div>
         </div>
         <div className="sm:w-1/2 lg:w-1/3 xl:w-1/4 p-8  rounded-3xl bg-gray-500/50">
           <h1 className="text-4xl font-medium text-white underline mb-4">

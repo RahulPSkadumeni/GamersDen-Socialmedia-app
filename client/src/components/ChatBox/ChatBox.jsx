@@ -77,74 +77,182 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
   }, [messages]);
 
   return (
-    <>
-      <div className="ChatBox-container">
-        {chat ? (
-          <>
-            <div className="chat-header">
-              <div className="follower">
-                <div>
-                  <img
-                    src={
-                      userData?.profilePicture
-                        ? process.env.REACT_APP_PUBLIC_FOLDER +
-                          userData.profilePicture
-                        : "https://i.pinimg.com/564x/cf/fc/1d/cffc1d6458cfeae198045145673b351b.jpg"
-                    }
-                    alt="Profile"
-                    className="followerImage"
-                    style={{ width: "50px", height: "50px" }}
-                  />
-                  <div className="name" style={{ fontSize: "0.9rem" }}>
-                    <span>
-                      {userData?.firstName} {userData?.lastName}
-                    </span>
-                  </div>
+    // <div className="fixed" style={{ width: "63%", height: "100%" }}>
+    //   <div class="">
+    //     {chat ? (
+    //       <div>
+    //         {" "}
+    //         <div className="" style={{ height: "100vh" }}>
+    //           <div className=" bg-emerald-700 rounded-t-2xl   ">
+    //             <div className="flex m-4 p-4 overflow-hidden ">
+    //               <img
+    //                 className=" rounded-full"
+    //                 src={
+    //                   userData?.profilePicture
+    //                     ? process.env.REACT_APP_PUBLIC_FOLDER +
+    //                       userData.profilePicture
+    //                     : "https://i.pinimg.com/564x/cf/fc/1d/cffc1d6458cfeae198045145673b351b.jpg"
+    //                 }
+    //                 alt="Profile"
+    //                 style={{ width: "50px", height: "50px" }}
+    //               />
+    //               <div
+    //                 className="text-white font-semibold"
+    //                 style={{ fontSize: "0.9rem" }}
+    //               >
+    //                 <span className="text-lg ml-5">
+    //                   {userData?.firstName} {userData?.lastName}
+    //                 </span>
+    //               </div>
+    //             </div>
+    //           </div>
+
+    //           <div className="">
+    //             <div className="chat-body overflow-y-scroll ">
+    //               {messages.map((message) => (
+    //                 <div
+    //                   ref={scroll}
+    //                   className={
+    //                     message.senderId === currentUser
+    //                       ? "message own"
+    //                       : "message"
+    //                   }
+    //                 >
+    //                   <span>{message.text}</span>{" "}
+    //                   <TimeAgo date={new Date(message.createdAt).getTime()} />
+    //                 </div>
+    //               ))}
+    //             </div>
+    //           </div>
+    //           {/* <div className=" chat-sender ml-5 bg-gray-400   absolute  bottom-0 w-7/12">
+    //         <div>+</div>
+    //         <InputEmoji value={newMessage} onChange={handleChange} />
+    //         <div
+    //           className=" button mt-3 text-teal-50 font-medium bg-blue-300 rounded-full "
+    //           onClick={handleSend}
+    //         >
+    //           Send
+    //         </div>
+    //         <input
+    //           type="file"
+    //           value={""}
+    //           name=""
+    //           id=""
+    //           style={{ display: "none" }}
+    //         />
+    //       </div> */}
+    //           {/* chat-sender */}
+
+    //           {/* className= */}
+    //         </div>
+    //         <div>
+    //           <div className=" chat-sender ml-5 bg-gray-400   absolute  bottom-0 w-7/12">
+    //             <div>+</div>
+    //             <InputEmoji value={newMessage} onChange={handleChange} />
+    //             <div
+    //               className=" button mt-3 text-teal-50 font-medium bg-blue-300 rounded-full "
+    //               onClick={handleSend}
+    //             >
+    //               Send
+    //             </div>
+    //             <input
+    //               type="file"
+    //               value={""}
+    //               name=""
+    //               id=""
+    //               style={{ display: "none" }}
+    //             />
+    //           </div>
+    //         </div>
+    //       </div>
+    //     ) : (
+    //       <span className="chatbox-empty-message">
+    //         Tap on a chat to start conversation...
+    //       </span>
+    //     )}
+    //   </div>
+    // </div>
+
+    <div class="fixed" style={{ width: "63%", height: "100%" }}>
+      <div className="  bg-emerald-700 rounded-t-2xl   ">
+        <div className="flex m-4 p-4 overflow-hidden ">
+          <img
+            className=" rounded-full"
+            src={
+              userData?.profilePicture
+                ? process.env.REACT_APP_PUBLIC_FOLDER + userData.profilePicture
+                : "https://i.pinimg.com/564x/cf/fc/1d/cffc1d6458cfeae198045145673b351b.jpg"
+            }
+            alt="Profile"
+            style={{ width: "50px", height: "50px" }}
+          />
+          <div
+            className="text-white font-semibold"
+            style={{ fontSize: "0.9rem" }}
+          >
+            <span className="text-lg ml-5">
+              {userData?.firstName} {userData?.lastName}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div className="fixed" style={{ width: "63%", height: "100%" }}>
+        <div className="">
+          {chat ? (
+            <div>
+              <div className="" style={{ height: "100vh" }}>
+                {/* ... other code ... */}
+                <div
+                  className="chat-body overflow-y-scroll"
+                  style={{ height: "calc(100vh - 150px)" }}
+                >
+                  {messages.map((message) => (
+                    <div
+                      ref={scroll}
+                      className={
+                        message.senderId === currentUser
+                          ? "message own"
+                          : "message"
+                      }
+                    >
+                      <span>{message.text}</span>{" "}
+                      <TimeAgo date={new Date(message.createdAt).getTime()} />
+                    </div>
+                  ))}
+                </div>
+                {/* ... other code ... */}
+              </div>
+              <div>
+                <div className="chat-sender ml-5 bg-gray-400 absolute bottom-0 w-7/12">
+                  {/* ... other code ... */}
                 </div>
               </div>
-              <hr
-                style={{
-                  width: "95%",
-                  border: "0.1px solid #ececec",
-                  marginTop: "20px",
-                }}
-              />
             </div>
-
-            <div className="chat-body">
-              {messages.map((message) => (
-                <>
-                  <div
-                    ref={scroll}
-                    className={
-                      message.senderId === currentUser
-                        ? "message own"
-                        : "message"
-                    }
-                  >
-                    <span>{message.text}</span>{" "}
-                    <TimeAgo date={new Date(message.createdAt).getTime()} />
-                  </div>
-                </>
-              ))}
-            </div>
-            {/* chat-sender */}
-            <div className="chat-sender">
-              <div>+</div>
-              <InputEmoji value={newMessage} onChange={handleChange} />
-              <div className="send-button button" onClick={handleSend}>
-                Send
-              </div>
-              <input type="file" name="" id="" style={{ display: "none" }} />
-            </div>
-          </>
-        ) : (
-          <span className="chatbox-empty-message">
-            Tap on a chat to start conversation...
-          </span>
-        )}
+          ) : (
+            <span className="chatbox-empty-message">
+              Tap on a chat to start a conversation...
+            </span>
+          )}
+        </div>
       </div>
-    </>
+      <div className=" fixed bottom-0  chat-sender ml-5 bg-gray-400  w-7/12">
+        <div>+</div>
+        <InputEmoji value={newMessage} onChange={handleChange} />
+        <div
+          className=" button mt-3 text-teal-50 font-medium bg-blue-300 rounded-full "
+          onClick={handleSend}
+        >
+          Send
+        </div>
+        <input
+          type="file"
+          value={""}
+          name=""
+          id=""
+          style={{ display: "none" }}
+        />
+      </div>
+    </div>
   );
 };
 

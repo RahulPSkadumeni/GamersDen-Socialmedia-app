@@ -55,14 +55,14 @@ router.post("/searchAll", async (req, res) => {
         Bucket: bucketName,
         Key: post.image,
       };
-      console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
+      // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
       const command = new GetObjectCommand(getObjectParams);
 
       const url = await getSignedUrl(s3Client, command, { expiresIn: 60 });
-      console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
-      console.log("<<<<<<<<<<<<<<<", url);
+      // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
+      // console.log("<<<<<<<<<<<<<<<", url);
       post.image = url;
-      console.log(">>>>>>>>>>>>>>>", post);
+      // console.log(">>>>>>>>>>>>>>>", post);
     }
 
     //?? search user

@@ -42,7 +42,7 @@ const upload = multer({ storage: storage });
 upload.single("fieldName");
 export const createGroup = async (req, res) => {
   if (!req.body.groupName) {
-    console.log("no body groupName");
+    // console.log("no body groupName");
     return res.status(400).json({ message: "groupName is required" });
   }
 
@@ -74,57 +74,37 @@ export const GetAllGroup = async (req, res) => {
   const userId = req.params.id;
   console.log(req.params.id);
   async function getAllGroups() {
-    try {
-      // const updatedGroups = [];
-      const groups = await Group.find({ members: { $ne: userId } }).sort({
-        groupName: 1,
-      });
-      console.log(`Found ${groups.length} groups:`);
-      console.log(groups);
-      // get image
-      console.log(">>>>>>>>>>>>>>>?????/{{{{{{}}}}}}>>>>>>>>>>>>>>>>>>>");
-      // for (const group of groups) {
-      //   console.log("groups IMAGE LINK");
-      //   Console.log(group.avatar);
-      //   const getObjectParams = {
-      //     Bucket: bucketName,
-      //     Key: group.avatar,
-      //   };
-      //   console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
-      //   const command = new GetObjectCommand(getObjectParams);
+    // try {
+    const updatedGroups = [];
+    const groups = await Group.find({ members: { $ne: userId } }).sort({
+      groupName: 1,
+    });
+    console.log(`Found ${groups.length} groups:`);
+    // console.log(groups);
+    // console.log("next is imageddddddddddddddddddddddddddd");
+    // groups.map(async (group) => {
+    //   console.log("groups IMAGE LINK");
+    //   console.log(group.avatar);
+    //   const getObjectParams = {
+    //     Bucket: bucketName,
+    //     Key: group.avatar,
+    //   };
+    //   // // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
+    //   const command = new GetObjectCommand(getObjectParams);
+    //   console.log(command);
+    //   const url = await getSignedUrl(s3Client, command, { expiresIn: 60 });
+    //   // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
+    //   console.log("<<<<<<<<<<<<<<<", url);
+    //   group.avatar = url;
+    //   // updatedGroups.push(group);
 
-      //   const url = await getSignedUrl(s3Client, command, { expiresIn: 60 });
-      //   console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
-      //   console.log("<<<<<<<<<<<<<<<", url);
-      //   group.avatar = url;
-      //   updatedGroups.push(group);
-
-      //   console.log(">>>>>>>>>>>>>>>", group);
-      // }
-
-      groups.map((group) => {
-        console.log("groups IMAGE LINK");
-        // Console.log(group.avatar);
-        // const getObjectParams = {
-        //   Bucket: bucketName,
-        //   Key: group.avatar,
-        // };
-        // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
-        // const command = new GetObjectCommand(getObjectParams);
-
-        // // const url = await getSignedUrl(s3Client, command, { expiresIn: 60 });
-        // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
-        // console.log("<<<<<<<<<<<<<<<", url);
-        // group.avatar = url;
-        // updatedGroups.push(group);
-
-        console.log(">>>>>>>>>>>>>>>", group);
-      });
-
-      res.status(200).json(groups);
-    } catch (err) {
-      console.error(`Error finding groups: ${err}`);
-    }
+    //   console.log(">>>>>>>>>>>>>>>", group);
+    // });
+    console.log("Groupssssssssssssssssssssssssssssssssssssssssssss", groups);
+    res.status(200).json(groups);
+    // } catch (err) {
+    //   console.error(`Error finding groups: ${err}`);
+    // }
   }
 
   getAllGroups();
@@ -139,15 +119,31 @@ export const GetGroup = async (req, res) => {
       // const updatedGroups = [];
       const group = await Group.findById(groupId);
 
-      console.log(group);
+      // console.log(group);
       // get image
-      console.log(">>>>>>>>>>>>>>>?????/{{{{{{}}}}}}>>>>>>>>>>>>>>>>>>>");
+      // console.log(">>>>>>>>>>>>>>>?????/{{{{{{}}}}}}>>>>>>>>>>>>>>>>>>>");
 
       // groups.map((group) => {
       //   console.log("groups IMAGE LINK");
 
       //   console.log(">>>>>>>>>>>>>>>", group);
       // });
+
+      // console.log("groups IMAGE LINK");
+      // console.log(group.avatar);
+      const getObjectParams = {
+        Bucket: bucketName,
+        Key: group.avatar,
+      };
+      // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
+      const command = new GetObjectCommand(getObjectParams);
+
+      const url = await getSignedUrl(s3Client, command, { expiresIn: 60 });
+      // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
+      // console.log("<<<<<<<<<<<<<<<", url);
+      group.avatar = url;
+
+      // console.log(">>>>>>>>>>>>>>>", group);
 
       res.status(200).json(group);
     } catch (err) {
@@ -159,9 +155,9 @@ export const GetGroup = async (req, res) => {
 };
 
 export const userGroup = async (req, res) => {
-  console.log("get all group");
+  // console.log("get all group");
   const userId = req.params.id;
-  console.log(req.params.id);
+  // console.log(req.params.id);
   async function getAllGroups() {
     try {
       const updatedGroups = [];
@@ -172,22 +168,25 @@ export const userGroup = async (req, res) => {
       console.log(groups);
 
       for (const group of groups) {
-        console.log("groups IMAGE LINK");
-        console.log(group.avatar);
+        // console.log("groups IMAGE LINK");
+        // console.log(group.avatar);
         const getObjectParams = {
           Bucket: bucketName,
           Key: group.avatar,
         };
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
+        // console.log(
+        //   ">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHH>>>>>>>>>>>>>>>>>>>>>>>>HHHHH<<<<<<<<<<<<<<<<<"
+        // );
         const command = new GetObjectCommand(getObjectParams);
 
         const url = await getSignedUrl(s3Client, command, { expiresIn: 60 });
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
-        console.log("<<<<<<<<<<<<<<<", url);
-        group.avatar = url;
+        // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
+        // console.log("<<<<<<<<<<<<<<<", url);
+        group.profile = url;
+        // console.log("clg>>>>>>>>>>>>>", group.profile);
         updatedGroups.push(group);
 
-        console.log(">>>>>>>>>>>>>>>", group);
+        // console.log(">>>>>>>>>>>>>>>", group);
       }
 
       res.status(200).json(updatedGroups);
@@ -205,11 +204,11 @@ export const JoinAGroup = async (req, res) => {
   const userId = req.body.data.userId;
 
   async function joinGroup(groupId, userId) {
-    console.log("NNNNNNNNN", groupId);
-    console.log("KKKKKKK", userId);
+    // console.log("NNNNNNNNN", groupId);
+    // console.log("KKKKKKK", userId);
     try {
       const group = await Group.findById(new mongoose.Types.ObjectId(groupId));
-      console.log(group);
+      // console.log(group);
       if (!group) {
         console.error(`Group with ID ${groupId} not found`);
         return;
@@ -319,29 +318,31 @@ export const createNewPost = async (req, res) => {
 };
 
 export const getAllPost = async (req, res) => {
-  console.log(" get all post here");
+  // console.log(
+  //   " get all post here:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+  // );
   const { groupId } = req.params;
-  console.log(groupId);
-  console.log(groupId);
+  // console.log(groupId);
+  // console.log(groupId);
   try {
     const posts = await Post.find({ groupId })
       .populate("groupId")
       .populate("userId", "-password");
-    console.log(posts);
+    // console.log(">>>>>>>>>>>>>>group post<<<<<<<<<<<<<<<<<<<<<", posts);
 
     for (const post of posts) {
       const getObjectParams = {
         Bucket: bucketName,
         Key: post.image,
       };
-      console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
+      // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
       const command = new GetObjectCommand(getObjectParams);
 
       const url = await getSignedUrl(s3Client, command, { expiresIn: 60 });
-      console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
-      console.log("<<<<<<<<<<<<<<<", url);
+      // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
+      // console.log("<<<<<<<<<<<<<<<", url);
       post.image = url;
-      console.log(">>>>>>>>>>>>>>>", post);
+      // console.log(">>>>>>>>>>>>>>>", post);
     }
 
     res.json(posts);

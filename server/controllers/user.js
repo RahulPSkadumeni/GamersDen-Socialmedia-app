@@ -16,6 +16,7 @@ import dotenv from "dotenv";
 import sharp from "sharp";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import Post from "../models/Post.js";
+import ChatModel from "../models/ChatModel.js";
 
 dotenv.config();
 const randomImageName = (bytes = 32) =>
@@ -120,31 +121,31 @@ export const deleteUser = async (req, res) => {
 };
 
 export const findUser = async (req, res) => {
-  console.log("find user>>>>>>>>");
+  // console.log("find user>>>>>>>>");
   try {
-    console.log(req.params.id);
-    console.log(
-      ">>>>>>>>>>>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS>>>>>>>>"
-    );
+    // console.log(req.params.id);
+    // console.log(
+    //   ">>>>>>>>>>>SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS>>>>>>>>"
+    // );
     const user = await User.findById(req.params.id);
 
-    console.log(user);
+    // console.log(user);
     if (user.picturePath) {
       const getObjectParams = {
         Bucket: bucketName,
         Key: user.picturePath,
       };
-      console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
+      // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
       const command = new GetObjectCommand(getObjectParams);
 
       const url = await getSignedUrl(s3Client, command, { expiresIn: 60 });
-      console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
-      console.log("<<<<<<<<<<<<<<<", url);
+      // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
+      // console.log("<<<<<<<<<<<<<<<", url);
       user.picturePath = url;
-      console.log(">>>>>>>>>>>>>>>", user);
+      // console.log(">>>>>>>>>>>>>>>", user);
     }
 
-    console.log(user);
+    // console.log(user);
     res.status(200).json(user);
   } catch (err) {
     console.log(err);
@@ -178,6 +179,7 @@ export const follow = async (req, res) => {
         // await currentUser.updateOne({ $push: { followings: req.params.id } });
         // await currentUser.updateOne({ $push: { followings: req.params.id } });
         console.log("started to follow " + currentUserName);
+
         res.status(200).json("started to follow ");
         console.log(user.followings);
       } else {
@@ -237,6 +239,17 @@ export const addRemoveFriend = async (req, res) => {
     const friends = await Promise.all(
       await user.friends.map((id) => User.findById(id))
     );
+
+    //?? add to chat
+
+    console.log(">>>>>>>>>>>adding to chat");
+    const newChat = new ChatModel({
+      members: [id, friendId],
+    });
+
+    const result = await newChat.save();
+    res.status(200).json(result);
+
     res.status(200).json(friends);
   } catch (error) {
     res.status(404).json(error);
@@ -322,14 +335,14 @@ export const allPost = async (req, res) => {
         Bucket: bucketName,
         Key: post.image,
       };
-      console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
+      // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
       const command = new GetObjectCommand(getObjectParams);
 
       const url = await getSignedUrl(s3Client, command, { expiresIn: 60 });
-      console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
-      console.log("<<<<<<<<<<<<<<<", url);
+      // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<");
+      // console.log("<<<<<<<<<<<<<<<", url);
       post.image = url;
-      console.log(">>>>>>>>>>>>>>>", post);
+      // console.log(">>>>>>>>>>>>>>>", post);
     }
 
     res.json(posts);
@@ -352,7 +365,31 @@ export const suggestedUser = async (req, res) => {
     if (suggestedUsers.length > 5) {
       suggestedUsers = suggestedUsers.slice(0, 5);
     }
-    console.log(suggestedUsers);
+
+    console.log(suggestedUsers[0]);
+    //userImage>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>{
+
+    for (const user of suggestedUsers) {
+      if (user.picturePath) {
+        const getObjectParams = {
+          Bucket: bucketName,
+          Key: user.picturePath,
+        };
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>HHHHHHHHHH<<<<<<<<<<<<<<<<<");
+        const command = new GetObjectCommand(getObjectParams);
+
+        const avatar = await getSignedUrl(s3Client, command, { expiresIn: 60 });
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<", avatar);
+        // console.log("<<<<<<<<<<<<<<<", url);
+
+        // console.log(">>>>>>>>>>>>>>>", post);
+        user.picturePath = avatar;
+      }
+
+      console.log("AVATAR>>>>>>>LLLLLLLLL>>>", user.picturePath);
+    }
+
+    console.log("??????????????????????????????????", suggestedUsers);
     res.status(200).json(suggestedUsers);
   } catch (error) {
     res.status(404).json(error);

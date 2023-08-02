@@ -8,4 +8,4 @@ router.get("/:chatId", getMessages);
 
 export default router;
 
-function a() {}
+// function a() {}

@@ -4,6 +4,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { BsCheckAll } from "react-icons/bs";
 import ReactTimeago from "react-timeago";
+import { getUser } from "../../api/usersApi/user";
+import Snotification from "./Snotification";
 
 const SingleNotification = (props) => {
   const { Notifications } = props;
@@ -11,41 +13,45 @@ const SingleNotification = (props) => {
 
   const token = useSelector((state) => state.token);
   const user = useSelector((state) => state.user);
+
   return (
     <>
       {Notifications?.length > 0 ? (
         Notifications.map((notification) => (
-          <div className="post" key={notification._id}>
-            <div className="postWrapper">
-              <div className="postTop">
-                <div className="postTopLeft">
-                  <img
-                    className="postProfileImg"
-                    src="https://png.pngtree.com/png-clipart/20190516/original/pngtree-purple-samurai-e-sports-logo-for-gaming-mascot-or-twitch-profile-png-image_4278450.jpg"
-                    alt="profilepic"
-                  />
-                  <div className="notifications">
-                    <span>{notification.message}</span>
-                    <ReactTimeago
-                      date={new Date(notification.createdAt).getTime()}
-                    />
-                  </div>
-                  <div>
-                    <div className="fixed">
-                      {notification.read ? (
-                        <div className="absolute text-sky-400 2xl right-1">
-                          <BsCheckAll />
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Snotification notification={notification} />
+          // <div className="post" key={notification._id}>
+          //   <div className="postWrapper">
+          //     <div className="bg-slate-600 rounded-3xl p-4">
+          //       <div className="postTopLeft">
+          //         <img
+          //           className=" h-12 rounded-full"
+          //           src="https://png.pngtree.com/png-clipart/20190516/original/pngtree-purple-samurai-e-sports-logo-for-gaming-mascot-or-twitch-profile-png-image_4278450.jpg"
+          //           alt="profilepic"
+          //         />
+          //         <div className="notifications">
+          //           <span>{notification.message}</span>
+          //           <ReactTimeago
+          //             date={new Date(notification.createdAt).getTime()}
+          //           />
+          //         </div>
+          //         <div>
+          //           <div className="">
+          //             {notification.read ? (
+          //               <div className="absolute text-sky-400 2xl right-1">
+          //                 <BsCheckAll />
+          //               </div>
+          //             ) : null}
+          //           </div>
+          //         </div>
+          //       </div>
+          //     </div>
+          //   </div>
+          // </div>
         ))
       ) : (
-        <div>No new Notifications</div>
+        <div className="text-black align-middle text-center justify-center p-24">
+          No new Notifications
+        </div>
       )}
     </>
   );

@@ -28,8 +28,8 @@ export default function RightbarHome({ profile }) {
         <div
           className={
             sidebarShow
-              ? "w-[-20rem] h-screen rounded-lg bg-gray-200 dark:bg-[#161819] shadow-xl duration-200"
-              : "w-24 h-screen rounded-lg bg-gray-200 dark:bg-[#161819] shadow-xl duration-200"
+              ? "w-[-20rem] vh-100   bg-gray-200 rounded-3xl shadow-xl duration-200 overflow-scroll"
+              : "w-24 h-screen  bg-gray-200 rounded-3xl shadow-xl duration-200"
           }
         >
           <div className="space-y-6 p-5">
@@ -42,13 +42,14 @@ export default function RightbarHome({ profile }) {
                   alt="avatar img"
                 /> */}
               </div>
+              {/* <img src={profile.picturePath} alt="" /> */}
               <div className={sidebarShow ? "relative ml-4" : "hidden"}>
                 <h2 className="text-[#242627] dark:text-gray-50 font-semibold text-lg">
                   {profile?.firstName} {profile?.lastName}
                 </h2>
                 {/* <span className="absolute -top-0.5 -right-2 w-2 h-2 rounded-full bg-[#6fce97]" /> */}
               </div>
-              <div
+              {/* <div
                 onClick={toggleSidebar}
                 className={
                   sidebarShow
@@ -57,11 +58,11 @@ export default function RightbarHome({ profile }) {
                 }
               >
                 {sidebarShow ? <IoIosArrowBack /> : <IoIosArrowForward />}
-              </div>
+              </div> */}
             </div>
             <ProfileRightBar />
-            <h4>User Friends</h4>
-            <h4 className="rightbarTitle">Online Friends</h4>
+            <h4>Online</h4>
+            {/* <h4 className=" flex flex-col">Online Friends</h4> */}
 
             <FriendsCard className="rightbarFriendList" />
           </div>
