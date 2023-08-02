@@ -39,17 +39,20 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(
   cors({
     // origin: ["http://localhost:3000"],
- origin:["https://bejewelled-sfogliatella-ee4a37.netlify.app/api"]
-    // origin: [
-    //   "https://main.dyzo0pe2jo0xu.amplifyapp.com/login/api/",
-    //   "https://main--mellifluous-liger-d3ba7b.netlify.app/api/",
-    //   "https://mellifluous-liger-d3ba7b.netlify.app/api",
-    //   "http://localhost:3000/api/",
-    // ],
+    origin: ["https://bejewelled-sfogliatella-ee4a37.netlify.app/api"],
+
     method: ["GET", "POST", "PATCH", "PUT"],
     credentials: true,
   })
 );
+
+// origin: [
+//   "https://main.dyzo0pe2jo0xu.amplifyapp.com/login/api/",
+//   "https://main--mellifluous-liger-d3ba7b.netlify.app/api/",
+//   "https://mellifluous-liger-d3ba7b.netlify.app/api",
+//   "http://localhost:3000/api/",
+// ],
+
 //app.use(cors());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
