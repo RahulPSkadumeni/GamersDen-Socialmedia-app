@@ -1,4 +1,6 @@
-const BASE_URL = "https://projecthostvercel.vercel.app/api";
+const BASE_URL = "https://projecthostvercel-rahulpskadumeni.vercel.app/api";
+
+// "https://projecthostvercel.vercel.app/api";
 
 //const BASE_URL = "http://localhost:3000/api";
 
